@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Warning</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      color: #111;
+      min-height: 100vh;
+      padding: 16px;
+    }
+    .wrap {
+      max-width: 420px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 24px;
+    }
+    .warning {
+      color: rgb(180, 40, 40);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: 30px;
+      line-height: 1.15;
+      margin: 0 0 20px;
+    }
+    p {
+      font-size: 16px;
+      line-height: 1.5;
+      color: #555;
+      margin: 0 0 20px;
+    }
+    .box {
+      background: #f8f8f8;
+      border: 1px solid #ddd;
+      border-radius: 16px;
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+    .box-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #777;
+      margin-bottom: 10px;
+    }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    li {
+      margin-bottom: 8px;
+      font-size: 15px;
+      color: #222;
+    }
+    .check-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin: 18px 0 22px;
+    }
+    .check-row input {
+      width: 22px;
+      height: 22px;
+      margin-top: 2px;
+      flex: 0 0 auto;
+    }
+    .check-row label {
+      font-size: 14px;
+      line-height: 1.4;
+      color: #444;
+    }
+    .button, button {
+      display: block;
+      width: 100%;
+      border-radius: 999px;
+      padding: 17px 20px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .continue-btn {
+      background: #bbb;
+      color: #fff;
+      font-weight: 700;
+      pointer-events: none;
+    }
+    .continue-btn.enabled {
+      background: #111;
+      pointer-events: auto;
+    }
+    .stop-btn {
+      margin-top: 12px;
+      background: transparent;
+      color: #555;
+      border: 1px solid #ccc;
+    }
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+      margin-top: 18px;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="warning">WARNING</div>
+
+      <h1>This product is associated with compulsive continuation.</h1>
+
+      <p>
+        What begins as a quick check may become extended, repetitive, and difficult to stop.
+      </p>
+
+      <div class="box">
+        <div class="box-title">POSSIBLE SIDE EFFECTS</div>
+        <ul>
+          <li>Time loss</li>
+          <li>Sleep disruption</li>
+          <li>Social comparison</li>
+          <li>Compulsive continuation</li>
+          <li>Loss of awareness</li>
+        </ul>
+      </div>
+
+      <div class="box">
+        <div class="box-title">ACTIVE INGREDIENTS</div>
+        <ul>
+          <li>Infinite scroll</li>
+          <li>Algorithmic targeting</li>
+          <li>Variable reward</li>
+          <li>No natural stopping point</li>
+        </ul>
+      </div>
+
+      <div class="check-row">
+        <input type="checkbox" id="consent" />
+        <label for="consent">
+          I understand that continuing may override my original intention.
+        </label>
+      </div>
+
+      <a id="continueBtn" class="button continue-btn" href="#">
+        Continue to Instagram
+      </a>
+
+      <button id="stopBtn" class="stop-btn" type="button">Stop here</button>
+
+      <div class="footer">
+        Part of a critical design experiment on scrolling, addiction, and awareness.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const instagramURL = "https://www.instagram.com/";
+    const stopURL = "https://www.google.com/";
+
+    const consent = document.getElementById("consent");
+    const continueBtn = document.getElementById("continueBtn");
+    const stopBtn = document.getElementById("stopBtn");
+
+    function updateButton() {
+      if (consent.checked) {
+        continueBtn.classList.add("enabled");
+        continueBtn.href = instagramURL;
+      } else {
+        continueBtn.classList.remove("enabled");
+        continueBtn.href = "#";
+      }
+    }
+
+    consent.addEventListener("change", updateButton);
+
+    continueBtn.addEventListener("click", function (e) {
+      if (!consent.checked) e.preventDefault();
+    });
+
+    stopBtn.addEventListener("click", function () {
+      if (document.referrer) {
+        history.back();
+      } else {
+        window.location.href = stopURL;
+      }
+    });
+
+    updateButton();
+  </script>
+</body>
+</html>
